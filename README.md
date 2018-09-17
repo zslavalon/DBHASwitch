@@ -18,6 +18,9 @@ for DB high Availability
 ├── --------------------------------------------------
 
 开发环境
+
 JDK8
+
 Mysql5.7
+
 SpringBoot
