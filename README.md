@@ -24,3 +24,5 @@ JDK8
 Mysql5.7
 
 SpringBoot
+
+轻量级版本，默认内存大小为256m
