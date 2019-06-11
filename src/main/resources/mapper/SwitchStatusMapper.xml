@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtstack.dbhaswitch.mapper.SwitchStatusDao">
+
+    <select id="SwitchStatus-select" resultType="com.dtstack.dbhaswitch.model.SwitchStatus"
+            parameterType="java.util.Map">
+        select * from SWITCHSTATUS
+        <where>
+            <include refid="query_filter"/>
+        </where>
+        order by id desc
+        <if test="start != null">
+            LIMIT #{start},#{limit}
+        </if>
+    </select>
+
+    <delete id="SwitchStatus-delete" parameterType="java.util.Map">
+        delete from SWITCHSTATUS where id = #{id};
+    </delete>
+
+    <select id="SwitchStatus-count" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from SWITCHSTATUS
+        <where>
+            <include refid="query_filter"/>
+        </where>
+    </select>
+
+
+    <insert id="SwitchStatus-insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into SWITCHSTATUS
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="dbType != null">db_type,</if>
+            <if test="rdsCode != null">rds_code,</if>
+            <if test="masterIp != null">master_ip,</if>
+            <if test="slaveIp != null">slave_ip,</if>
+            <if test="port != null">port,</if>
+            <if test="hostName != null">host_name,</if>
+            <if test="switchTimeBegin != null">switch_time_begin,</if>
+            <if test="switchTimeEnd != null">switch_time_end,</if>
+            <if test="switchResult != null">switch_result,</if>
+            <if test="switchType != null">switch_type,</if>
+            <if test="swtichInfo != null">swtich_info,</if>
+            <if test="schedule != null">schedule,</if>
+            <if test="logStr != null">log_str,</if>
+            <if test="rdsId != null">rds_id,</if>
+            gmt_create,
+            gmt_modified,
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="dbType != null">#{dbType},</if>
+            <if test="rdsCode != null">#{rdsCode},</if>
+            <if test="masterIp != null">#{masterIp},</if>
+            <if test="slaveIp != null">#{slaveIp},</if>
+            <if test="port != null">#{port},</if>
+            <if test="hostName != null">#{hostName},</if>
+            <if test="switchTimeBegin != null">#{switchTimeBegin},</if>
+            <if test="switchTimeEnd != null">#{switchTimeEnd},</if>
+            <if test="switchResult != null">#{switchResult},</if>
+            <if test="switchType != null">#{switchType},</if>
+            <if test="swtichInfo != null">#{swtichInfo},</if>
+            <if test="schedule != null">#{schedule},</if>
+            <if test="logStr != null">#{logStr},</if>
+            <if test="rdsId != null">#{rdsId},</if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <update id="SwitchStatus-update" parameterType="java.util.Map">
+        update SWITCHSTATUS
+        <set>
+            <if test="id != null">id = #{id},</if>
+            <if test="dbType != null">db_type = #{dbType},</if>
+            <if test="rdsCode != null">rds_code = #{rdsCode},</if>
+            <if test="masterIp != null">master_ip = #{masterIp},</if>
+            <if test="slaveIp != null">slave_ip = #{slaveIp},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="hostName != null">host_name = #{hostName},</if>
+            <if test="switchTimeBegin != null">switch_time_begin = #{switchTimeBegin},</if>
+            <if test="switchTimeEnd != null">switch_time_end = #{switchTimeEnd},</if>
+            <if test="switchResult != null">switch_result = #{switchResult},</if>
+            <if test="switchType != null">switch_type = #{switchType},</if>
+            <if test="swtichInfo != null">swtich_info = #{swtichInfo},</if>
+            <if test="schedule != null">schedule = #{schedule},</if>
+            <if test="logStr != null">log_str = #{logStr},</if>
+            <if test="rdsId != null">rds_id = #{rdsId},</if>
+            gmt_modified = now(),
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <sql id="query_filter">
+        <if test="id != null">and id = #{id}</if>
+        <if test="dbType != null">and db_type = #{dbType}</if>
+        <if test="rdsCode != null">and rds_code = #{rdsCode}</if>
+        <if test="masterIp != null">and master_ip = #{masterIp}</if>
+        <if test="slaveIp != null">and slave_ip = #{slaveIp}</if>
+        <if test="port != null">and port = #{port}</if>
+        <if test="hostName != null">and host_name = #{hostName}</if>
+        <if test="switchTimeBegin != null">and switch_time_begin = #{switchTimeBegin}</if>
+        <if test="switchTimeEnd != null">and switch_time_end = #{switchTimeEnd}</if>
+        <if test="switchResult != null">and switch_result = #{switchResult}</if>
+        <if test="switchType != null">and switch_type = #{switchType}</if>
+        <if test="swtichInfo != null">and swtich_info = #{swtichInfo}</if>
+        <if test="schedule != null">and schedule = #{schedule}</if>
+        <if test="logStr != null">and log_str = #{logStr}</if>
+        <if test="rdsId != null">and rds_id = #{rdsId}</if>
+    </sql>
+
+    <sql id="select_content_fragment_log">
+        id,rds_code,master_ip,schedule,switch_type,log_str,swtich_info,rds_id
+    </sql>
+
+    <select id="SwitchStatus-getDetailIns" resultType="com.dtstack.dbhaswitch.model.SwitchStatus">
+        select
+        <include refid="select_content_fragment_log"/>
+        from SWITCHSTATUS
+        where
+        id = #{id};
+    </select>
+
+    <sql id="select_content_fragment">
+        id,rds_code,switch_time_begin,switch_time_end,switch_type
+    </sql>
+
+    <select id="SwitchStatus-log" resultType="com.dtstack.dbhaswitch.model.SwitchStatus" parameterType="java.util.Map">
+        select
+        <include refid="select_content_fragment"/>
+        from SWITCHSTATUS
+        where 1 = 1
+        <if test="rdsId != null">
+            and rds_id = #{rdsId}
+        </if>
+        <if test="startTime != null">
+            and gmt_create >= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and gmt_create &lt;= #{endTime}
+        </if>
+        order by gmt_create desc
+    </select>
+
+</mapper>

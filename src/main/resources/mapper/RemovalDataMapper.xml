@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtstack.dbhaswitch.mapper.RemovalDataDao">
+
+    <select id="Removal-select" resultType="com.dtstack.dbhaswitch.model.RemovalData" parameterType="java.util.Map">
+        select * from REMOVALDATA
+        <where>
+            <include refid="query_filter"/>
+        </where>
+        <if test="start != null">
+            LIMIT #{start},#{limit}
+        </if>
+    </select>
+
+    <delete id="Removal-delete" parameterType="java.util.Map">
+        delete from REMOVALDATA where id = #{id};
+    </delete>
+
+    <select id="Removal-count" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from REMOVALDATA
+        <where>
+            <include refid="query_filter"/>
+        </where>
+    </select>
+
+
+    <insert id="Removal-insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into REMOVALDATA
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="rdsCode != null">rds_code,</if>
+            <if test="ip != null">ip,</if>
+            <if test="port != null">port,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="updateId != null">update_id,</if>
+            <if test="dbStatus != null">db_status,</if>
+            <if test="passWord != null">pass_word,</if>
+            <if test="hostName != null">host_name,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="rdsUrl != null">rds_url,</if>
+            <if test="rdsId != null">rds_id,</if>
+            <if test="judgeMaster != null">judge_master,</if>
+            <if test="isDelete != null">is_delete,</if>
+            gmt_create,
+            gmt_modified,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="rdsCode != null">#{rdsCode},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="port != null">#{port},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="updateId != null">#{updateId},</if>
+            <if test="dbStatus != null">#{dbStatus},</if>
+            <if test="passWord != null">#{passWord},</if>
+            <if test="hostName != null">#{hostName},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="rdsUrl != null">#{rdsUrl},</if>
+            <if test="rdsId != null">#{rdsId},</if>
+            <if test="judgeMaster != null">#{judgeMaster},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <update id="Removal-update" parameterType="java.util.Map">
+        update REMOVALDATA
+        <set>
+            <if test="id != null">id = #{id},</if>
+            <if test="rdsCode != null">rds_code = #{rdsCode},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="updateId != null">update_id = #{updateId},</if>
+            <if test="dbStatus != null">db_status = #{dbStatus},</if>
+            <if test="passWord != null">pass_word = #{passWord},</if>
+            <if test="hostName != null">host_name = #{hostName},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="rdsUrl != null">rds_url = #{rdsUrl},</if>
+            <if test="rdsId != null">rds_id = #{rdsId},</if>
+            <if test="judgeMaster != null">judge_master = #{judgeMaster},</if>
+            <if test="isDelete =! null">is_delete = #{isDelete},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+
+    <sql id="query_filter">
+        <if test="id != null">and id = #{id}</if>
+        <if test="rdsCode != null">and rds_code = #{rdsCode}</if>
+        <if test="ip != null">and ip = #{ip}</if>
+        <if test="port != null">and port = #{port}</if>
+        <if test="userName != null">and user_name = #{userName}</if>
+        <if test="updateId != null">and update_id = #{updateId}</if>
+        <if test="dbStatus != null">and db_status = #{dbStatus}</if>
+        <if test="passWord != null">and pass_word = #{passWord}</if>
+        <if test="hostName != null">and host_name = #{hostName}</if>
+        <if test="instanceId != null">and instance_id = #{instanceId}</if>
+        <if test="rdsUrl != null">and rds_url = #{rdsUrl}</if>
+        <if test="rdsId != null">and rds_id = #{rdsId}</if>
+        <if test="judgeMaster != null">and judge_master = #{judgeMaster}</if>
+        <if test="isDelete != null">and is_delete = #{isDelete}</if>
+    </sql>
+
+
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtstack.dbhaswitch.mapper.InstanceDao">
+
+    <select id="Instance-select" resultType="com.dtstack.dbhaswitch.model.Instance" parameterType="java.util.Map">
+        select * from Instance
+        <where>
+            <include refid="query_filter"/>
+        </where>
+        <if test="start != null">
+            LIMIT #{start},#{limit}
+        </if>
+    </select>
+
+    <delete id="Instance-delete" parameterType="java.util.Map">
+        delete from Instance where id = #{id};
+    </delete>
+
+    <select id="Instance-count" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(*) from Instance
+        <where>
+            <include refid="query_filter"/>
+        </where>
+    </select>
+
+
+    <insert id="Instance-insert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="id">
+        insert into Instance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="rdsCode != null">rds_code,</if>
+            <if test="ip != null">ip,</if>
+            <if test="port != null">port,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="passWord != null">pass_word,</if>
+            <if test="hostName != null">host_name,</if>
+            <if test="judgeMaster != null">judge_master,</if>
+            <if test="brotherIp != null">brother_ip,</if>
+            <if test="rdsId != null">rds_id,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="rdsUrl != null">rds_url,</if>
+            <if test="instanceId != null">instance_id,</if>
+            <if test="rdsStatus != null">rds_status,</if>
+            gmt_create,
+            gmt_modified,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="rdsCode != null">#{rdsCode},</if>
+            <if test="ip != null">#{ip},</if>
+            <if test="port != null">#{port},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="passWord != null">#{passWord},</if>
+            <if test="hostName != null">#{hostName},</if>
+            <if test="judgeMaster != null">#{judgeMaster},</if>
+            <if test="brotherIp != null">#{brotherIp},</if>
+            <if test="rdsId != null">#{rdsId},</if>
+            <if test="rdsUrl != null">#{rdsUrl},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="instanceId != null">#{instanceId},</if>
+            <if test="rdsStatus != null">#{rdsStatus},</if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <update id="Instance-update" parameterType="java.util.Map">
+        update Instance
+        <set>
+            <if test="rdsCode != null">rds_code = #{rdsCode},</if>
+            <if test="ip != null">ip = #{ip},</if>
+            <if test="port != null">port = #{port},</if>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="passWord != null">pass_word = #{passWord},</if>
+            <if test="hostName != null">host_name = #{hostName},</if>
+            <if test="judgeMaster != null">judge_master = #{judgeMaster},</if>
+            <if test="brotherIp != null">brother_ip = #{brotherIp},</if>
+            <if test="rdsId != null">rds_id = #{rdsId},</if>
+            <if test="rdsUrl != null">rds_url = #{rdsUrl},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="instanceId != null">instance_id = #{instanceId},</if>
+            <if test="rdsStatus != null">rds_status = #{rdsStatus},</if>
+            gmt_modified = now(),
+        </set>
+        where id = #{id}
+
+    </update>
+
+    <sql id="query_filter">
+        <if test="id != null">and id = #{id}</if>
+        <if test="rdsCode != null">and rds_code = #{rdsCode}</if>
+        <if test="ip != null">and ip = #{ip}</if>
+        <if test="port != null">and port = #{port}</if>
+        <if test="userName != null">and user_name = #{userName}</if>
+        <if test="passWord != null">and pass_word = #{passWord}</if>
+        <if test="hostName != null">and host_name = #{hostName}</if>
+        <if test="judgeMaster != null">and judge_master = #{judgeMaster}</if>
+        <if test="brotherIp != null">and brother_ip = #{brotherIp}</if>
+        <if test="rdsId != null">and rds_id = #{rdsId}</if>
+        <if test="rdsUrl != null">and rds_url = #{rdsUrl}</if>
+        <if test="isDelete != null">and is_delete = #{isDelete}</if>
+        <if test="instanceId != null">and instance_id = #{instanceId}</if>
+        <if test="rdsStatus != null">and rds_status = #{rdsStatus}</if>
+    </sql>
+
+    <select id="Instance-sendDns" resultType="com.dtstack.dbhaswitch.model.Instance" parameterType="java.util.Map">
+        select ip,rds_url from Instance
+        <where>
+            <include refid="query_filter"/>
+        </where>
+    </select>
+
+
+</mapper>
