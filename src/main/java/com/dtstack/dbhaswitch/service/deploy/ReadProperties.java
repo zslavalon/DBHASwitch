@@ -73,6 +73,6 @@ public class ReadProperties implements InitializingBean {
                     }
                 }
             }
-        }, 10000, 15000);
+        }, 5000, 10000);
     }
 }
