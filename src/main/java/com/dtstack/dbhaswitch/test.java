@@ -1,15 +1,19 @@
 package com.dtstack.dbhaswitch;
 
+import org.apache.catalina.LifecycleState;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class test {
 
 
     private static final DateTimeFormatter getNowTime = DateTimeFormatter.ofPattern("HH:mm");
-
+///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/jre/lib/rt.jar!/sun/reflect/Reflection.class
     public test() {
         LocalDateTime setTime = LocalDateTime.now();
         String setTimeDayStr = getNowTime.format(setTime);
@@ -17,7 +21,7 @@ public class test {
 
         String setTimeStartStr = "00:00";
         String setTimeEndStr = "23:59";
-
+        List<?> d = new ArrayList<>();
         try {
             Date beginTime = sdf.parse(setTimeStartStr);
             Date endTime = sdf.parse(setTimeDayStr);
@@ -29,11 +33,5 @@ public class test {
         }
     }
 
-    public static void main(String[] args) {
 
-        int i = 2;
-        if (i != 0 && i != 1 || i == 2) {
-            System.out.println("111");
-        }
-    }
 }
